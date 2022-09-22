@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>CRUD em Javascript Indigo</title>
+  </head>
+  <body>
+    <div id="app">
+      <form id="add-hero-form">
+        <label>
+          Hero name:
+          <input
+            type="text"
+            id="hero-name"
+            name="hero_name"
+            placeholder="Give your hero a name"
+          />
+        </label>
+
+        <label>
+          Hero description:
+          <textarea
+            id="hero-description"
+            name="hero_description"
+            cols="30"
+            rows="10"
+            placeholder="Describe your hero"
+          >
+          </textarea>
+        </label>
+
+        <button type="submit" id="submit-hero">Add your hero</button>
+      </form>
+
+      <table id="heroes-list">
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </table>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
