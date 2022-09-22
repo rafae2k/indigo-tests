@@ -5,32 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
     <title>CRUD em Javascript Indigo</title>
   </head>
   <body>
     <div id="app">
       <form id="add-hero-form">
-        <label>
-          Hero name:
-          <input
-            type="text"
-            id="hero-name"
-            name="hero_name"
-            placeholder="Give your hero a name"
-          />
-        </label>
+        <label for="hero-name"> Hero name: </label>
+        <input
+          type="text"
+          id="hero-name"
+          name="hero_name"
+          placeholder="Give your hero a name"
+        />
 
-        <label>
-          Hero description:
-          <textarea
-            id="hero-description"
-            name="hero_description"
-            cols="30"
-            rows="10"
-            placeholder="Describe your hero"
-          >
-          </textarea>
-        </label>
+        <label for="hero-description"> Hero description: </label>
+        <textarea
+          id="hero-description"
+          name="hero_description"
+          cols="30"
+          rows="10"
+          placeholder="Describe your hero"
+        ></textarea>
 
         <button type="submit" id="submit-hero">Add your hero</button>
       </form>
