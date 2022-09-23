@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { useState } from 'react';
-import { useAsync } from 'react-async-hook';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -8,6 +7,7 @@ import {
     Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
     List as MaterialList, ListItem, ListItemText, TextField, Typography
 } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 
 import { deleteHeroById, getAllHeroes, updateHeroById } from '../services/api';
 import { IHero } from '../types';
@@ -15,17 +15,23 @@ import { validationHeroSchema } from '../utils/schema';
 
 export const List = () => {
   const [hero, setHero] = useState<IHero>()
-  const [refetch, setRefetch] = useState(false)
   const [open, setOpen] = useState(false)
 
-  const handleSubmitForm = (values: IHero) => {
+  const {
+    isLoading,
+    error,
+    data: heroes,
+    refetch
+  } = useQuery(['heroes'], getAllHeroes)
+
+  const handleSubmitForm = async (values: Omit<IHero, 'id'>) => {
     if (hero) {
-      updateHeroById(hero.id, values)
+      await updateHeroById(hero.id, values)
     }
     setSubmitting(false)
     resetForm()
     setOpen(false)
-    setRefetch(!refetch)
+    refetch()
   }
 
   const {
@@ -44,19 +50,17 @@ export const List = () => {
     },
     validateOnBlur: true,
     validationSchema: validationHeroSchema,
-    onSubmit: handleSubmitForm
+    onSubmit: async (values) => await handleSubmitForm(values)
   })
 
   const handleClose = () => {
     setOpen(false)
   }
 
-  const handleDelete = (hero: IHero) => {
-    deleteHeroById(hero.id)
-    setRefetch(!refetch)
+  const handleDelete = async (hero: IHero) => {
+    await deleteHeroById(hero.id)
+    refetch()
   }
-
-  const heroes = useAsync(getAllHeroes, [refetch])
 
   return (
     <div>
@@ -67,7 +71,7 @@ export const List = () => {
           margin: '0 auto'
         }}
       >
-        {heroes.result?.data.map((hero) => (
+        {heroes?.data.map((hero) => (
           <ListItem key={hero.id}>
             <ListItemText
               primary={hero.name}
