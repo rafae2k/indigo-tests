@@ -16,18 +16,15 @@
   </head>
   <body>
     <div id="app">
-      <form id="add-hero-form">
+      <form id="add-hero-form" class="hero-form">
         <label for="hero-name"> Hero name: </label>
         <input
           type="text"
-          id="hero-name"
           name="hero_name"
           placeholder="Give your hero a name"
         />
-
         <label for="hero-description"> Hero description: </label>
         <textarea
-          id="hero-description"
           name="hero_description"
           cols="30"
           rows="10"
@@ -42,8 +39,41 @@
           <th>Id</th>
           <th>Name</th>
           <th>Description</th>
+          <th>edit/delete</th>
         </tr>
       </table>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <header class="modal-header">
+          <h2>Edit your hero</h2>
+        </header>
+        <div id="edit-hero-form" class="modal-form hero-form">
+          <label for="hero-name"> Hero name: </label>
+          <input
+            type="text"
+            id="hero-edit-name"
+            name="hero_name"
+            placeholder="Give your hero a name"
+          />
+
+          <label for="hero-description"> Hero description: </label>
+          <textarea
+            id="hero-edit-description"
+            name="hero_description"
+            cols="30"
+            rows="10"
+            placeholder="Describe your hero"
+          ></textarea>
+
+          <div class="buttons-wrapper">
+            <button type="button" id="cancel" class="button delete">
+              Cancel
+            </button>
+            <button type="button" id="save" class="button edit">Save</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>
